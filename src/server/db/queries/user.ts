@@ -1,0 +1,28 @@
+import { Query } from '../';
+import type { TUsers } from '../models';
+
+const all = () =>
+	Query<Array<TUsers>>(`
+    SELECT
+        id,
+        name,
+        email,
+        created_at
+    FROM users
+`);
+
+const one = (id: number) =>
+	Query<Array<TUsers>>(
+		`
+    SELECT
+        *
+    FROM users
+    WHERE id = ?
+`,
+		[id]
+	);
+
+export default {
+	all,
+	one
+};
